@@ -1,6 +1,5 @@
 import re
 from collections import Counter
-from random import sample
 
 def words(text): 
   return re.findall(r'\w+', text.lower())
@@ -46,7 +45,7 @@ import streamlit as st
 # change somewhere in 111062692.py, then you can see the "always rerun" at the top-right of your screen
 # choose "always rerun" to automatically update your app every time you change its source code.
 
-st.title("Spellchecker Demo")
+st.title("Spellchecker")
 
 choice = open('output.txt').read()
 choice = choice.split('\n')
