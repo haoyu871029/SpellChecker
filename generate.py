@@ -6,8 +6,10 @@ options = []
 for line in source:
   words = line.split(' ')
   for word in words:
-    if word.find(':') != -1:
-      word = word[:word.find(':')]
+    # 尋找字串 word 中是否含有冒號‘：’，若找到則回傳冒號在字串中的索引位置，否則回傳 -1。
+    index = word.find(':')
+    if index != -1:
+      word = word[:index]
     options.append(word)
 options = [" "]+sample(options,len(options))
 
