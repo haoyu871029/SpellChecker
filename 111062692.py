@@ -11,18 +11,20 @@ def percent(word): return word_count[word] / N # float
 
 letters  = 'abcdefghijklmnopqrstuvwxyz'
 def edits1(word):
+    # 單字分屍
     splits     = [(word[:i], word[i:])    for i in range(len(word) + 1)]
-    # 抓 少打一個字:
+
+    # 使用者可能少打一個字，故修正:
     deletes    = [L + R[1:]               for L, R in splits if R]
-    # 抓 其中兩個字母打相反:
+    # 使用者可能其中兩個字母打相反，故修正:
     transposes = [L + R[1] + R[0] + R[2:] for L, R in splits if len(R)>1]
-    # 抓 各個字母打錯的情況:
+    # 使用者可能某個字母打錯，故修正:
     replaces   = [L + c + R[1:]           for L, R in splits if R for c in letters]
-    # 抓 字母之間的每個空隙多打一個字母的情況:
+    # 使用者可能在字母之間的空隙多打一個字母，故修正:
     inserts    = [L + c + R               for L, R in splits for c in letters]
-    # 抓 若某字母不小心打兩次:
-    doubles    = [L + R[0] + R[:]         for L, R in splits if R]
-    # 抓 連續字母少打一個字的情況:
+    # 使用者可能某個字母不小心打了兩次，故修正:
+    doubles    = [L + R[0] + R         for L, R in splits if R]
+    # 使用者可能某連續字母少打了一個，故修正:
     one = [L + R[1:] for L, R in splits if len(R)>1 and R[0]==R[1]]
     return set(deletes + transposes + replaces + inserts + doubles + one)
 
